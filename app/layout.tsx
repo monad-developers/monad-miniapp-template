@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { FrameProvider } from "@/components/farcaster-provider";
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-            <FrameProvider>
-              {children}
-            </FrameProvider>
+        <FrameProvider>{children}</FrameProvider>
       </body>
     </html>
   );

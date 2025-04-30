@@ -13,5 +13,5 @@ export default function Home() {
     <SafeAreaContainer insets={context?.client.safeAreaInsets}>
       <Demo />
     </SafeAreaContainer>
-  )
+  );
 }

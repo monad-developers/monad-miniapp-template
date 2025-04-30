@@ -38,7 +38,8 @@ interface FrameProviderProps {
 export function FrameProvider({ children }: FrameProviderProps) {
   const [context, setContext] = useState<FrameContext | null>(null);
   const [actions, setActions] = useState<typeof sdk.actions | null>(null);
-  const [isEthProviderAvailable, setIsEthProviderAvailable] = useState<boolean>(false);
+  const [isEthProviderAvailable, setIsEthProviderAvailable] =
+    useState<boolean>(false);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,16 +71,16 @@ export function FrameProvider({ children }: FrameProviderProps) {
     }
   }, [isSDKLoaded]);
 
-  const value = {
-    context,
-    actions,
-    isSDKLoaded,
-    isEthProviderAvailable,
-    error,
-  };
-
   return (
-    <FrameProviderContext.Provider value={value}>
+    <FrameProviderContext.Provider
+      value={{
+        context,
+        actions,
+        isSDKLoaded,
+        isEthProviderAvailable,
+        error,
+      }}
+    >
       <FrameWalletProvider>{children}</FrameWalletProvider>
     </FrameProviderContext.Provider>
   );

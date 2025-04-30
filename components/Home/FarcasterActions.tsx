@@ -1,8 +1,8 @@
 import { useMiniAppContext } from "@/hooks/use-miniapp-context";
+import { APP_URL } from "@/lib/constants";
 
 export function FarcasterActions() {
   const { actions } = useMiniAppContext();
-  const appUrl = process.env.NEXT_PUBLIC_URL;
 
   return (
     <div className="space-y-4 border border-[#333] rounded-md p-4">
@@ -27,7 +27,7 @@ export function FarcasterActions() {
               onClick={() =>
                 actions?.composeCast({
                   text: "Check out this Monad Farcaster MiniApp Template!",
-                  embeds: [`${appUrl}`],
+                  embeds: [`${APP_URL}`],
                 })
               }
             >
