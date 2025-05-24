@@ -4,7 +4,7 @@ The template demonstrates all Mini App capabilities and lets you easily modify i
 
 ## Cloning the Template
 
-You can the following command to clone the Mini App template to your local machine:
+You can use the following command to clone the Mini App template to your local machine:
 
 ```
 git clone https://github.com/monad-developers/monad-miniapp-template.git
