@@ -32,7 +32,7 @@ yarn run dev
 
 Warpcast has a neat [Embed tool](https://warpcast.com/~/developers/mini-apps/embed) that you can use to inspect the Mini App before you publish it.
 
-Unfortunately, the embed tool can only work with remote URL. Inputting a localhost URL does not work.
+Unfortunately, the embed tool can only work with a remote URL. Inputting a localhost URL does not work.
 
 As a workaround, you may make the local app accessible remotely using a tool like `cloudflared` or `ngrok`. In this guide we will use `cloudflared`.
 
@@ -197,7 +197,7 @@ Mini Apps have the capability to perform native actions that enhance the user ex
 Actions like:
 
 - `addFrame`: Allows the user to save (bookmark) the app in a dedicated section
-- `composeCast`: Allows the MiniApp to prompt the user to cast with prefilled text and media
+- `composeCast`: Allows the Mini App to prompt the user to cast with prefilled text and media
 - `viewProfile`: Presents a profile of a Farcaster user in a client native UI
 
 Learn more about Mini App actions [here](https://miniapps.farcaster.xyz/docs/sdk/actions/add-frame)
@@ -289,6 +289,6 @@ You can learn more about publishing the Mini App and other manifest properties [
 
 In this guide, you explored Farcaster Mini Apps — the simplest way to create engaging, high-retention, and easily monetizable applications!
 
-You also discovered the key capabilities of Mini Apps and how you can use the [Monad Farcaster MiniApp Template](https://github.com/monad-developers/monad-miniapp-template) to build your own.
+You also discovered the key capabilities of Mini Apps and how you can use the [Monad Farcaster Mini App Template](https://github.com/monad-developers/monad-miniapp-template) to build your own.
 
 For more details, check out the official Mini App documentation [here](https://miniapps.farcaster.xyz/).
