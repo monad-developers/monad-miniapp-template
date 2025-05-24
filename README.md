@@ -184,7 +184,7 @@ export function User() {
 }
 ```
 
-The template also provide an example of the same in `components/Home/User.tsx` file.
+The template also provides an example of the same in `components/Home/User.tsx` file.
 
 You can learn more about Context [here](https://miniapps.farcaster.xyz/docs/sdk/context).
 
