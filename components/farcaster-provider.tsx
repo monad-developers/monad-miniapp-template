@@ -1,22 +1,13 @@
-'use client'
-
 import type { Context } from '@farcaster/frame-sdk'
 import sdk from '@farcaster/frame-sdk'
-import {
-  type ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
-import FrameWalletProvider from './frame-wallet-provider'
+import { useQuery } from '@tanstack/react-query'
+import { type ReactNode, createContext, useContext } from 'react'
 
 interface FrameContextValue {
-  context: Context.FrameContext | null
+  context: Context.FrameContext | undefined
   isSDKLoaded: boolean
   isEthProviderAvailable: boolean
-  error: string | null
-  actions: typeof sdk.actions | null
+  actions: typeof sdk.actions | undefined
 }
 
 const FrameProviderContext = createContext<FrameContextValue | undefined>(
@@ -36,52 +27,30 @@ interface FrameProviderProps {
 }
 
 export function FrameProvider({ children }: FrameProviderProps) {
-  const [context, setContext] = useState<Context.FrameContext | null>(null)
-  const [actions, setActions] = useState<typeof sdk.actions | null>(null)
-  const [isEthProviderAvailable, setIsEthProviderAvailable] =
-    useState<boolean>(false)
-  const [isSDKLoaded, setIsSDKLoaded] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    const load = async () => {
+  const farcasterContextQuery = useQuery({
+    queryKey: ['farcaster-context'],
+    queryFn: async () => {
+      const context = await sdk.context
       try {
-        const context = await sdk.context
-        if (context) {
-          setContext(context)
-          setActions(sdk.actions)
-          setIsEthProviderAvailable(sdk.wallet.ethProvider ? true : false)
-        } else {
-          setError('Failed to load Farcaster context')
-        }
         await sdk.actions.ready()
+        return { context, isReady: true }
       } catch (err) {
-        setError(
-          err instanceof Error ? err.message : 'Failed to initialize SDK',
-        )
         console.error('SDK initialization error:', err)
       }
-    }
-
-    if (sdk && !isSDKLoaded) {
-      load().then(() => {
-        setIsSDKLoaded(true)
-        console.log('SDK loaded')
-      })
-    }
-  }, [isSDKLoaded])
+      return { context, isReady: false }
+    },
+  })
 
   return (
     <FrameProviderContext.Provider
       value={{
-        context,
-        actions,
-        isSDKLoaded,
-        isEthProviderAvailable,
-        error,
+        context: farcasterContextQuery.data?.context,
+        actions: sdk.actions,
+        isSDKLoaded: farcasterContextQuery.isLoading,
+        isEthProviderAvailable: Boolean(sdk.wallet.ethProvider),
       }}
     >
-      <FrameWalletProvider>{children}</FrameWalletProvider>
+      {children}
     </FrameProviderContext.Provider>
   )
 }
