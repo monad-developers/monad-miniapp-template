@@ -1,34 +1,34 @@
-import { useFrame } from "../components/farcaster-provider";
-import { FrameContext } from "@farcaster/frame-core/dist/context";
-import sdk from "@farcaster/frame-sdk";
+import type { Context } from '@farcaster/frame-sdk'
+import type sdk from '@farcaster/frame-sdk'
+import { useFrame } from '../components/farcaster-provider'
 
 // Define specific types for each context
 interface FarcasterContextResult {
-  context: FrameContext;
-  actions: typeof sdk.actions | null;
-  isEthProviderAvailable: boolean;
+  context: Context.FrameContext
+  actions: typeof sdk.actions | null
+  isEthProviderAvailable: boolean
 }
 
 interface NoContextResult {
-  type: null;
-  context: null;
-  actions: null;
-  isEthProviderAvailable: boolean;
+  type: null
+  context: null
+  actions: null
+  isEthProviderAvailable: boolean
 }
 
 // Union type of all possible results
-type ContextResult = FarcasterContextResult | NoContextResult;
+type ContextResult = FarcasterContextResult | NoContextResult
 
 export const useMiniAppContext = (): ContextResult => {
   // Try to get Farcaster context
   try {
-    const farcasterContext = useFrame();
+    const farcasterContext = useFrame()
     if (farcasterContext.context) {
       return {
         context: farcasterContext.context,
         actions: farcasterContext.actions,
         isEthProviderAvailable: farcasterContext.isEthProviderAvailable,
-      } as FarcasterContextResult;
+      } as FarcasterContextResult
     }
   } catch (e) {
     // Ignore error if not in Farcaster context
@@ -38,5 +38,5 @@ export const useMiniAppContext = (): ContextResult => {
   return {
     context: null,
     actions: null,
-  } as NoContextResult;
-};
+  } as NoContextResult
+}
