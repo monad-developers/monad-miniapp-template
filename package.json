@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@farcaster/auth-client": "^0.3.0",
-    "@farcaster/frame-node": "^0.0.22",
-    "@farcaster/frame-sdk": "^0.0.36",
-    "@farcaster/frame-wagmi-connector": "^0.0.24",
+    "@farcaster/frame-node": "^0.0.36",
+    "@farcaster/frame-sdk": "^0.0.55",
+    "@farcaster/frame-wagmi-connector": "^0.0.44",
     "@tanstack/react-query": "^5.64.2",
     "next": "14.2.6",
     "react": "^18",
