@@ -1,7 +1,7 @@
-import { useMiniAppContext } from '@/hooks/use-miniapp-context'
+import { useFrame } from '@/components/farcaster-provider'
 
 export function User() {
-  const { context } = useMiniAppContext()
+  const { context } = useFrame()
 
   return (
     <div className="space-y-4 border border-[#333] rounded-md p-4">

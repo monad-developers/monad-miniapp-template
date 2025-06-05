@@ -5,6 +5,7 @@ import { type ReactNode, createContext, useContext } from 'react'
 
 interface FrameContextValue {
   context: Context.FrameContext | undefined
+  isLoading: boolean
   isSDKLoaded: boolean
   isEthProviderAvailable: boolean
   actions: typeof sdk.actions | undefined
@@ -41,12 +42,15 @@ export function FrameProvider({ children }: FrameProviderProps) {
     },
   })
 
+  const isReady = farcasterContextQuery.data?.isReady ?? false
+
   return (
     <FrameProviderContext.Provider
       value={{
         context: farcasterContextQuery.data?.context,
         actions: sdk.actions,
-        isSDKLoaded: farcasterContextQuery.isLoading,
+        isLoading: farcasterContextQuery.isPending,
+        isSDKLoaded: isReady && Boolean(farcasterContextQuery.data?.context),
         isEthProviderAvailable: Boolean(sdk.wallet.ethProvider),
       }}
     >
