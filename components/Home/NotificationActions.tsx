@@ -62,7 +62,7 @@ export function NotificationActions() {
           <button
             type="button"
             className="bg-white text-black rounded-md p-2 text-sm"
-            onClick={() => actions?.addFrame()}
+            onClick={() => actions?.addMiniApp()}
           >
             Add this Mini App to receive notifications
           </button>
