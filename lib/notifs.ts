@@ -38,7 +38,7 @@ export async function sendFrameNotification({
       notificationId: crypto.randomUUID(),
       title,
       body,
-      targetUrl: APP_URL,
+      targetUrl: APP_URL || "",
       tokens: [notificationDetails.token],
     } satisfies SendNotificationRequest),
   });
