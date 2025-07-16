@@ -14,7 +14,7 @@ export function FarcasterActions() {
             <button
               type="button"
               className="bg-white text-black rounded-md p-2 text-sm"
-              onClick={() => actions?.addFrame()}
+              onClick={() => actions?.addMiniApp()}
             >
               addFrame
             </button>
