@@ -3,6 +3,7 @@ import {
   SendNotificationRequest,
   sendNotificationResponseSchema,
 } from "@farcaster/miniapp-sdk";
+import { getUserNotificationDetails } from "./kv";
 
 type SendFrameNotificationResult =
   | {
@@ -22,8 +23,7 @@ export async function sendFrameNotification({
   title: string;
   body: string;
 }): Promise<SendFrameNotificationResult> {
-  // TODO: Get notification details
-  const notificationDetails = { url: "", token: "" };
+  const notificationDetails = await getUserNotificationDetails(fid);
 
   if (!notificationDetails) {
     return { state: "no_token" };
