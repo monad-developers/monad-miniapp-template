@@ -1,5 +1,5 @@
 import { useFrame } from '@/components/farcaster-provider'
-import { farcasterFrame } from '@farcaster/frame-wagmi-connector'
+import { farcasterMiniApp as miniAppConnector } from '@farcaster/miniapp-wagmi-connector'
 import { parseEther } from 'viem'
 import { monadTestnet } from 'viem/chains'
 import {
@@ -101,7 +101,7 @@ export function WalletActions() {
           <button
             type="button"
             className="bg-white text-black w-full rounded-md p-2 text-sm"
-            onClick={() => connect({ connector: farcasterFrame() })}
+            onClick={() => connect({ connector: miniAppConnector() })}
           >
             Connect Wallet
           </button>

@@ -1,10 +1,10 @@
-import type { Context } from '@farcaster/frame-sdk'
-import sdk from '@farcaster/frame-sdk'
+import type { Context } from '@farcaster/miniapp-sdk'
+import sdk from '@farcaster/miniapp-sdk'
 import { useQuery } from '@tanstack/react-query'
 import { type ReactNode, createContext, useContext } from 'react'
 
 interface FrameContextValue {
-  context: Context.FrameContext | undefined
+  context: Context.MiniAppContext | undefined
   isLoading: boolean
   isSDKLoaded: boolean
   isEthProviderAvailable: boolean

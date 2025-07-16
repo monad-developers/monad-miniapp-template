@@ -1,4 +1,4 @@
-import { farcasterFrame } from '@farcaster/frame-wagmi-connector'
+import { farcasterMiniApp as miniAppConnector } from '@farcaster/miniapp-wagmi-connector'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { http, WagmiProvider, createConfig } from 'wagmi'
 import { monadTestnet } from 'wagmi/chains'
@@ -8,7 +8,7 @@ export const config = createConfig({
   transports: {
     [monadTestnet.id]: http(),
   },
-  connectors: [farcasterFrame()],
+  connectors: [miniAppConnector()],
 })
 
 const queryClient = new QueryClient()

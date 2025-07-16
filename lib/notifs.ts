@@ -2,7 +2,7 @@ import { APP_URL } from "@/lib/constants";
 import {
   SendNotificationRequest,
   sendNotificationResponseSchema,
-} from "@farcaster/frame-sdk";
+} from "@farcaster/miniapp-sdk";
 
 type SendFrameNotificationResult =
   | {
