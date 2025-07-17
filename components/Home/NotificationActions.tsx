@@ -63,7 +63,7 @@ export function NotificationActions() {
               className="bg-white text-black rounded-md p-2 text-sm"
               onClick={() => actions?.addMiniApp()}
             >
-              "Add this Mini App to receive notifications"
+              Add this Mini App to receive notifications
             </button>
             <p className="text-xs text-red-600">
               You must add this Mini App and enable notifications to send a test
