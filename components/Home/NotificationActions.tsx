@@ -1,73 +1,70 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useFrame } from "@/components/farcaster-provider";
 import { sendFrameNotification } from "@/lib/notifs";
 import { getUserNotificationDetails } from "@/lib/kv";
 
 export function NotificationActions() {
   const { context, actions } = useFrame();
-  const [sending, setSending] = useState(false);
   const [result, setResult] = useState<string | null>(null);
-  const [canSendNotification, setCanSendNotification] = useState(false);
 
-  async function getNotificationDetails() {
-    if (context && context.user?.fid) {
-      const notificationDetails = await getUserNotificationDetails(
-        context.user.fid
-      );
-      setCanSendNotification(Boolean(notificationDetails));
-    }
-  }
+  const fid = context?.user?.fid;
+  const {
+    data: notificationDetails,
+    isLoading: notificationLoading,
+  } = useQuery({
+    queryKey: ["notification-details", fid],
+    queryFn: async () => {
+      if (!fid) return null;
+      return await getUserNotificationDetails(fid);
+    },
+    enabled: !!fid,
+  });
 
-  useEffect(() => {
-    getNotificationDetails();
-  }, [context]);
-
-  async function handleSendNotification() {
-    if (!context?.user?.fid || !canSendNotification) return;
-    setSending(true);
-    setResult(null);
-    try {
-      const res = await sendFrameNotification({
-        fid: context.user.fid,
+  const { mutate: sendNotification, isPending: isSendingNotification } = useMutation({
+    mutationFn: async () => {
+      if (!fid) throw new Error("No fid");
+      return await sendFrameNotification({
+        fid,
         title: "Test Notification",
         body: "This is a test notification from the Monad MiniApp Template!",
       });
+    },
+    onSuccess: (res) => {
       if (res.state === "success") setResult("Notification sent!");
-      else if (res.state === "rate_limit")
-        setResult("Rate limited. Try again later.");
-      else if (res.state === "no_token")
-        setResult("No notification token found.");
+      else if (res.state === "rate_limit") setResult("Rate limited. Try again later.");
+      else if (res.state === "no_token") setResult("No notification token found.");
       else setResult("Error sending notification.");
-    } catch (e) {
+    },
+    onError: () => {
       setResult("Error sending notification.");
-    } finally {
-      setSending(false);
-    }
-  }
+    },
+  });
 
   return (
     <div className="border border-[#333] rounded-md p-4">
       <h2 className="text-xl font-bold text-left mb-2">Notifications</h2>
       <div className="flex flex-col space-y-2">
-        {canSendNotification ? (
+        {notificationDetails ? (
           <button
             type="button"
             className="bg-white text-black rounded-md p-2 text-sm"
-            onClick={handleSendNotification}
-            disabled={sending || !canSendNotification}
+            onClick={() => sendNotification()}
+            disabled={isSendingNotification || !notificationDetails}
           >
-            {sending ? "Sending..." : "Send Test Notification"}
+            {isSendingNotification ? "Sending..." : "Send Test Notification"}
           </button>
         ) : (
           <button
             type="button"
             className="bg-white text-black rounded-md p-2 text-sm"
             onClick={() => actions?.addMiniApp()}
+            disabled={notificationLoading}
           >
-            Add this Mini App to receive notifications
+            {notificationLoading ? "Checking..." : "Add this Mini App to receive notifications"}
           </button>
         )}
-        {!canSendNotification && (
+        {!notificationDetails && !notificationLoading && (
           <p className="text-xs text-red-600">
             You must add this Mini App and enable notifications to send a test
             notification.
