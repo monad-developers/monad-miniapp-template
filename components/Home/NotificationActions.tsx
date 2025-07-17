@@ -24,7 +24,6 @@ export function NotificationActions() {
 
         return await fetch("/api/send-notification", {
           method: "POST",
-          mode: "same-origin",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             fid,
