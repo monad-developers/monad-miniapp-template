@@ -16,7 +16,9 @@ export function NotificationActions() {
     queryKey: ["notification-details", fid],
     queryFn: async () => {
       if (!fid) return null;
-      return await getUserNotificationDetails(fid);
+      let details = await getUserNotificationDetails(fid);
+      console.log(details);
+      return details;
     },
     enabled: !!fid,
   });
