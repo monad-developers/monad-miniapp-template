@@ -4,6 +4,7 @@ import { FarcasterActions } from '@/components/Home/FarcasterActions'
 import { User } from '@/components/Home/User'
 import { WalletActions } from '@/components/Home/WalletActions'
 import { NotificationActions } from './NotificationActions'
+import CustomOGImageAction from './CustomOGImageAction'
 
 export function Demo() {
   return (
@@ -16,6 +17,7 @@ export function Demo() {
         <FarcasterActions />
         <NotificationActions />
         <WalletActions />
+        <CustomOGImageAction />
       </div>
     </div>
   )
