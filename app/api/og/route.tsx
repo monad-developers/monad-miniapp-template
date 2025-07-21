@@ -11,6 +11,11 @@ export async function GET(request: NextRequest) {
     
     const backgroundGradient = '#2D1B69';
     
+    // Load Inter font from CDN
+    const interFontData = await fetch(
+      '/Inter.ttf'
+    ).then((res) => res.arrayBuffer());
+    
     return new ImageResponse(
       (
         <div
@@ -24,6 +29,7 @@ export async function GET(request: NextRequest) {
             background: backgroundGradient,
             padding: '40px',
             position: 'relative',
+            fontFamily: 'Inter, system-ui, sans-serif',
           }}
         >
           <div
@@ -96,6 +102,7 @@ export async function GET(request: NextRequest) {
                   margin: '0 0 8px 0',
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
                   lineHeight: '1.2',
+                  fontFamily: 'Inter, system-ui, sans-serif',
                 }}
               >
                 {username}
@@ -106,35 +113,25 @@ export async function GET(request: NextRequest) {
                   color: 'rgba(255, 255, 255, 0.8)',
                   margin: '0',
                   fontWeight: '400',
+                  fontFamily: 'Inter, system-ui, sans-serif',
                 }}
               >
-                Monad Mini App Template
+                Generated using Monad Mini App Template
               </p>
             </div>
-          </div>
-
-          <div
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              width: '60px',
-              height: '60px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px',
-            }}
-          >
-            ⚡
           </div>
         </div>
       ),
       {
         width: 600,
         height: 400,
+        fonts: [
+          {
+            name: 'Inter',
+            data: interFontData,
+            style: 'normal',
+          },
+        ],
         headers: {
           'Cache-Control': 'public, max-age=3600, s-maxage=3600',
         },
