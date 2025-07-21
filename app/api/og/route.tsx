@@ -1,7 +1,7 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest } from 'next/server';
 
-export const runtime = 'edge';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
@@ -132,9 +132,6 @@ export async function GET(request: NextRequest) {
             style: 'normal',
           },
         ],
-        headers: {
-          'Cache-Control': 'public, max-age=3600, s-maxage=3600',
-        },
       }
     );
   } catch (e) {
