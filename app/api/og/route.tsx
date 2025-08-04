@@ -11,9 +11,9 @@ export async function GET(request: NextRequest) {
     
     const backgroundGradient = '#2D1B69';
     
-    // Load Inter font from CDN
+    // Load Inter font from public directory
     const interFontData = await fetch(
-      '/Inter.ttf'
+      `${request.nextUrl.origin}/Inter.ttf`
     ).then((res) => res.arrayBuffer());
     
     return new ImageResponse(
