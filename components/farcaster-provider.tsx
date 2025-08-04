@@ -9,6 +9,7 @@ interface FrameContextValue {
   isSDKLoaded: boolean
   isEthProviderAvailable: boolean
   actions: typeof sdk.actions | undefined
+  haptics: typeof sdk.haptics | undefined
 }
 
 const FrameProviderContext = createContext<FrameContextValue | undefined>(
@@ -49,6 +50,7 @@ export function FrameProvider({ children }: FrameProviderProps) {
       value={{
         context: farcasterContextQuery.data?.context,
         actions: sdk.actions,
+        haptics: sdk.haptics,
         isLoading: farcasterContextQuery.isPending,
         isSDKLoaded: isReady && Boolean(farcasterContextQuery.data?.context),
         isEthProviderAvailable: Boolean(sdk.wallet.ethProvider),

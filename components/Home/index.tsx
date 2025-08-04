@@ -5,6 +5,7 @@ import { User } from '@/components/Home/User'
 import { WalletActions } from '@/components/Home/WalletActions'
 import { NotificationActions } from './NotificationActions'
 import CustomOGImageAction from './CustomOGImageAction'
+import { Haptics } from './Haptics'
 
 export function Demo() {
   return (
@@ -18,6 +19,7 @@ export function Demo() {
         <NotificationActions />
         <WalletActions />
         <CustomOGImageAction />
+        <Haptics />
       </div>
     </div>
   )
