@@ -7,12 +7,18 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": []
+    "ignore": [
+      "node_modules",
+      "dist",
+      "build",
+      ".expo"
+    ]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "lineWidth": 100
   },
   "organizeImports": {
     "enabled": true
@@ -35,6 +41,9 @@
           "fix": "safe"
         },
         "noNonNullAssertion": {
+          "level": "warn"
+        },
+        "noExplicitAny": {
           "level": "warn"
         }
       }
