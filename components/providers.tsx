@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { FrameProvider } from '@/components/farcaster-provider'
 import { WalletProvider } from '@/components/wallet-provider'
 

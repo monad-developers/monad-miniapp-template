@@ -1,3 +1,4 @@
+import React from 'react'
 import type { SafeAreaInsets } from '@/types'
 
 interface SafeAreaContainerProps {
