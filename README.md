@@ -122,22 +122,27 @@ You can edit the `app/page.tsx` file to customize the Splash screen.
 ```js
 ...
 
-const appUrl = env.NEXT_PUBLIC_URL;
+// pages/api/frame.js
+export default function handler(req, res) {
+  const appUrl = process.env.NEXT_PUBLIC_URL;
 
-const frame = {
-  version: "next",
-  imageUrl: `${appUrl}/images/feed.png`,
-  button: {
-    title: "Launch Template",
-    action: {
-      type: "launch_frame",
-      name: "Monad Farcaster MiniApp Template",
-      url: appUrl,
-      splashImageUrl: `${appUrl}/images/splash.png`, // App icon in the splash screen (200px * 200px)
-      splashBackgroundColor: "#f7f7f7", // Splash screen background color
+  const frame = {
+    version: "next",
+    imageUrl: `${appUrl}/images/feed.png`,
+    button: {
+      title: "Template",
+      action: {
+        type: "launch_frame",
+        name: "Monad Farcaster MiniApp Template",
+        url: appUrl,
+        splashImageUrl: `${appUrl}/images/splash.png`,
+        splashBackgroundColor: "#f7f7f7",
+      },
     },
-  },
-};
+  };
+
+  res.status(200).json(frame);
+}
 
 ...
 ```
